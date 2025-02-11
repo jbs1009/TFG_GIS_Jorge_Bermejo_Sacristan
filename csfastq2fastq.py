@@ -31,4 +31,4 @@ def csfastq_a_fastq(archivo_csfastq, archivo_fastq):
 
             secuencia_fastq = convierte_seq(secuencia)
 
-            archivo_fastq.write(f"{identificador}\n{secuencia_fastq}\n{separador}\n{calidad}")
+            archivo_fastq.write(f"{identificador}\n{secuencia_fastq}\n{separador}\n{calidad}\n")
