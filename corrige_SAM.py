@@ -38,10 +38,33 @@ def corrige_sam(archivo_sam, archivo_sam_corregido):
                 archivo_sam_corregido.write(linea)
             
             else:
-                lista_linea = linea.split("\t")
-                
-                if suma_CIGAR(lista_linea[5]) == len(lista_linea[9]):
-                    archivo_sam_corregido.write(linea)
+
+                if linea.count("SRR") > 1:
+                    indice = linea[3:].find("SRR") + 3
+                    
+                    linea1 = linea[:indice]
+                    lista_linea1 = linea1.split("\t")
+                    
+                    linea2 = linea[indice:]
+                    lista_linea2 = linea2.split("\t")
+
+                    if len(lista_linea1) >= 10:
+
+                        if suma_CIGAR(lista_linea1[5]) == len(lista_linea1[9]):
+                            archivo_sam_corregido.write(linea1 + "\n")
+
+                    if len(lista_linea2) >= 10:
+
+                        if suma_CIGAR(lista_linea2[5]) == len(lista_linea2[9]):
+                            archivo_sam_corregido.write(linea2)
+                    
+                else:
+                    lista_linea = linea.split("\t")
+
+                    if len(lista_linea) >= 10:
+                    
+                        if suma_CIGAR(lista_linea[5]) == len(lista_linea[9]):
+                            archivo_sam_corregido.write(linea)
                 
 
 
